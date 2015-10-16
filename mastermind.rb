@@ -40,22 +40,14 @@ class Mastermind
     responses[input]
   end
 
-    if input ==
-    elsif input.length == 4
-      keep_guessing(input)
-    elsif input.length < 4
-        Response.new(message: "Your guess is too short! It must be 4 characters long! You've taken #{@guesses.count-1} guesses!")
-    else input.length > 4
-        Response.new(message: "Your guess is too long! It can only be 4 characters long! You've taken #{@guesses.count-1} guesses!")
-    end
-  end
-
   def keep_guessing(input)
     secret = "rgby"
-    if input == secret
-      Response.new(message: "You Win! Do you want to (p)lay again or (q)uit?")
+    if input.length != 4
+      "Your guess can only be 4 characters long!"
+    elsif input == secret
+      "You Win! Do you want to (p)lay again or (q)uit?"
     else
-      Response.new(message: "Guess again! You've taken #{@guesses.count-1} guesses!")
+      "Guess again! You've taken #{@guesses.count-1} guesses!"
     end
   end
 end
