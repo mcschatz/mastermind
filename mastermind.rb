@@ -43,7 +43,7 @@ class Mastermind
   def keep_guessing(input)
     secret = "rgby"
     if input.length != 4
-      "Your guess can only be 4 characters long!"
+      "Your guess must be 4 characters long!"
     elsif input == secret
       "You Win! Do you want to (p)lay again or (q)uit?"
     else
