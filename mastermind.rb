@@ -41,23 +41,26 @@ class Mastermind
     elsif input == "c"
       Response.new(message: "The secret code is rgby. You've taken #{@guesses.count-1} guesses!")
     elsif input.length == 4
-      secret = "rgby"
-      if input == secret
-        Response.new(message: "You Win! Do you want to (p)lay again or (q)uit?")
-      else
-        Response.new(message: "Guess again! You've taken #{@guesses.count-1} guesses!")
-      end
+      keep_guessing(input)
     elsif input.length < 4
         Response.new(message: "Your guess is too short! It must be 4 characters long! You've taken #{@guesses.count-1} guesses!")
     else input.length > 4
         Response.new(message: "Your guess is too long! It can only be 4 characters long! You've taken #{@guesses.count-1} guesses!")
     end
   end
+
+  def keep_guessing(input)
+    secret = "rgby"
+    if input == secret
+      Response.new(message: "You Win! Do you want to (p)lay again or (q)uit?")
+    else
+      Response.new(message: "Guess again! You've taken #{@guesses.count-1} guesses!")
+    end
+  end
 end
 
 Game.new.play
 
-# Otherwise give them feedback on the guess like this:
 # 'RRGB' has 3 of the correct elements with 2 in the correct position
 # Congratulations! You guessed the sequence 'GRRB' in 8 guesses over 4 minutes,
 # 22 seconds.
