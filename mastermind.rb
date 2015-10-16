@@ -22,7 +22,7 @@ class Mastermind
 
   def run(input)
     guesses << input
-    answers = ["p", "i", "q", "c"]
+    answers = ["p", "i", "q", "c", "play", "instuctions", "quit"]
     if answers.include?(input)
       automated_responses(input)
     else
@@ -31,12 +31,13 @@ class Mastermind
   end
 
   def automated_responses(input)
-    responses= {"p" => "Let's play! I have generated a beginner sequence with
-                four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow.
-                Use (q)uit at any time to end the game. What's your guess?",
-                "i" => "To play, enter a sequence of 4 letters. Ex: ghty",
-                "q" => "Thanks for playing!",
-                "c" => "The secret code is rgby. You've taken #{@guesses.count-1} guesses!"}
+    responses= {"p"           => "Let's play! I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?",
+                "i"           => "To play, enter a sequence of 4 letters. Ex: ghty",
+                "q"           => "Thanks for playing!",
+                "c"           => "The secret code is rgby. You've taken #{@guesses.count-1} guesses!",
+                "play"        => "Let's play! I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?",
+                "instuctions" => "To play, enter a sequence of 4 letters. Ex: ghty",
+                "quit"        => "Thanks for playing!"}
     responses[input]
   end
 
