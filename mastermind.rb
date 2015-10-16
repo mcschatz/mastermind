@@ -3,22 +3,13 @@ class Game
     puts "Welcome to MASTERMIND. Would you like to (p)lay, read the (i)nstructions, or (q)uit?"
     mastermind = Mastermind.new
     response = nil
-    until response && response.status == :end
+    until response == "Thanks for playing!"
       print "> "
       input = gets.chomp.downcase
-      response = mastermind.execute(input)
-      puts response.message
+      response = mastermind.run(input)
+      puts response
     end
     puts "Goodbye!"
-  end
-end
-
-class Response
-  attr_reader :message, :status, :guesses
-
-  def initialize(inputs)
-    @message = inputs[:message]
-    @status  = inputs[:status]
   end
 end
 
@@ -29,17 +20,27 @@ class Mastermind
     @guesses = []
   end
 
-  def execute(input)
+  def run(input)
     guesses << input
+    answers = ["p", "i", "q", "c"]
+    if answers.include?(input)
+      automated_responses(input)
+    else
+      keep_guessing(input)
+    end
+  end
 
-    if input == "p"
-      Response.new(message: "Let's play! I have generated a beginner sequence with four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow. Use (q)uit at any time to end the game. What's your guess?")
-    elsif input == "i"
-      Response.new(message: "To play, enter a sequence of 4 letters. Ex: ghty")
-    elsif input == "q"
-      Response.new(status: :end)
-    elsif input == "c"
-      Response.new(message: "The secret code is rgby. You've taken #{@guesses.count-1} guesses!")
+  def automated_responses(input)
+    responses= {"p" => "Let's play! I have generated a beginner sequence with
+                four elements made up of: (r)ed, (g)reen, (b)lue, and (y)ellow.
+                Use (q)uit at any time to end the game. What's your guess?",
+                "i" => "To play, enter a sequence of 4 letters. Ex: ghty",
+                "q" => "Thanks for playing!",
+                "c" => "The secret code is rgby. You've taken #{@guesses.count-1} guesses!"}
+    responses[input]
+  end
+
+    if input ==
     elsif input.length == 4
       keep_guessing(input)
     elsif input.length < 4
